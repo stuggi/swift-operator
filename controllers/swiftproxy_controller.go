@@ -123,10 +123,6 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 
 	// Create a Service and endpoints for the proxy
 	var swiftPorts = map[service.Endpoint]endpoint.Data{
-		service.EndpointAdmin: {
-			Port: swift.ProxyPort,
-			Path: "",
-		},
 		service.EndpointPublic: {
 			Port: swift.ProxyPort,
 			Path: "/v1/AUTH_%(tenant_id)s",
@@ -140,8 +136,9 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 	apiEndpoints := make(map[string]string)
 
 	for endpointType, data := range swiftPorts {
-		endpointName := swift.ServiceName + "-" + string(endpointType)
-		svcOverride := service.GetOverrideSpecForEndpoint(instance.Spec.Override.Service, endpointType)
+		endpointTypeStr := string(endpointType)
+		endpointName := swift.ServiceName + "-" + endpointTypeStr
+		svcOverride := instance.Spec.Override.Service[endpointTypeStr]
 
 		exportLabels := util.MergeStringMaps(
 			serviceLabels,
@@ -164,7 +161,7 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 				},
 			}),
 			5,
-			svcOverride,
+			&svcOverride,
 		)
 		if err != nil {
 			instance.Status.Conditions.Set(condition.FalseCondition(
@@ -199,7 +196,7 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 
 		// TODO: TLS, pass in https as protocol, create TLS cert
 		apiEndpoints[string(endpointType)], err = svc.GetAPIEndpoint(
-			svcOverride, data.Protocol, data.Path)
+			&svcOverride, data.Protocol, data.Path)
 		if err != nil {
 			return ctrl.Result{}, err
 		}

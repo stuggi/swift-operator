@@ -68,21 +68,12 @@ spec:
                       manifest of several child resources.
                     properties:
                       service:
-                        description: Override configuration for the Service created
-                          to serve traffic to the cluster.
-                        items:
+                        additionalProperties:
                           description: OverrideSpec - service override configuration
                             for the Service created to serve traffic to the cluster.
                             Allows for the manifest of the created Service to be overwritten
                             with custom configuration.
                           properties:
-                            endpoint:
-                              description: Endpoint, OpenStack endpoint this service
-                                maps to
-                              enum:
-                              - internal
-                              - public
-                              type: string
                             endpointURL:
                               description: EndpointURL to be used to register the
                                 service in keystone.
@@ -247,10 +238,10 @@ spec:
                                     services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types'
                                   type: string
                               type: object
-                          required:
-                          - endpoint
                           type: object
-                        type: array
+                        description: Override configuration for the Service created
+                          to serve traffic to the cluster.
+                        type: object
                     type: object
                   passwordSelectors:
                     default:

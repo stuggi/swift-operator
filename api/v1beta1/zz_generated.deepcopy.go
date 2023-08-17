@@ -47,9 +47,9 @@ func (in *ProxyOverrideSpec) DeepCopyInto(out *ProxyOverrideSpec) {
 	*out = *in
 	if in.Service != nil {
 		in, out := &in.Service, &out.Service
-		*out = make([]service.OverrideSpec, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
+		*out = make(map[string]service.OverrideSpec, len(*in))
+		for key, val := range *in {
+			(*out)[key] = *val.DeepCopy()
 		}
 	}
 }

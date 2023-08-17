@@ -299,10 +299,10 @@ github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
-github.com/stuggi/keystone-operator/api v0.0.0-20230809093350-20b643058213 h1:Z0P9Rp0PS5v2LKOfgb0yG5ocrAtPE3frO1WkgNQtcMA=
-github.com/stuggi/keystone-operator/api v0.0.0-20230809093350-20b643058213/go.mod h1:7XDbjj7lKALfVzLz/9vbIqR1LfyvJy6cPj1j7me2QzE=
-github.com/stuggi/lib-common/modules/common v0.0.0-20230814062650-de4427759d7a h1:nMu4jPHWtU/V861H62MibYPqGfd2VimMTZHvNwsSrAU=
-github.com/stuggi/lib-common/modules/common v0.0.0-20230814062650-de4427759d7a/go.mod h1:2fZFojsJsTA4MfGy50JEwbXaIP7Hr7h7x8hbhlMBedY=
+github.com/stuggi/keystone-operator/api v0.0.0-20230816122109-152862232878 h1:aHzW7mRMa9wPL+eNFs1LIgai6n/YQGfWGs4THvCgdYE=
+github.com/stuggi/keystone-operator/api v0.0.0-20230816122109-152862232878/go.mod h1:lVnDSDDh1FP5Pf5innToISDMAEIDvROdNjYL0kxvePw=
+github.com/stuggi/lib-common/modules/common v0.0.0-20230816121842-440502f06c8f h1:vtj1VkzuFksRGea9ueGoxY011uj3OOdpFSXNGZmnCyI=
+github.com/stuggi/lib-common/modules/common v0.0.0-20230816121842-440502f06c8f/go.mod h1:HwbOw/YcG6Zf3Hukq8KM3ET0s5sjNCaSJd2lyXWaZoA=
 github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f/go.mod h1:N2zxlSyiKSe5eX1tZViRH5QA0qijqEDrYZiPEAiq3wU=
 github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415/go.mod h1:GwrjFmJcFw6At/Gs6z4yjiIwzuJ1/+UwLxMQDVQXShQ=
 github.com/xeipuuv/gojsonschema v1.2.0/go.mod h1:anYRn/JVcOK2ZgGU+IjEV4nwlhoK5sQluxsYJ78Id3Y=
