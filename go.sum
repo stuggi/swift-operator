@@ -83,8 +83,6 @@ github.com/openstack-k8s-operators/keystone-operator/api v0.3.1-0.20240605055850
 github.com/openstack-k8s-operators/keystone-operator/api v0.3.1-0.20240605055850-8ee0ece70906/go.mod h1:GWJdAtjPUEwNFbRKwlXkeTHMiGCqySE4qJo0fKZSayo=
 github.com/openstack-k8s-operators/lib-common/modules/ansible v0.3.1-0.20240615134235-24529fcff658 h1:Igs42gZNIrvqkAn4YR6MulwfT3xU4T1yhLQ6RhOmiGY=
 github.com/openstack-k8s-operators/lib-common/modules/ansible v0.3.1-0.20240615134235-24529fcff658/go.mod h1:tP+nxk95PisCKJaXE/an2igG9lluxuOVhdmV9WtkR2s=
-github.com/openstack-k8s-operators/lib-common/modules/common v0.3.1-0.20240615134235-24529fcff658 h1:h10bPourbXsIN7p5M//SUly/UzWfEp+d5tloBnyDDMI=
-github.com/openstack-k8s-operators/lib-common/modules/common v0.3.1-0.20240615134235-24529fcff658/go.mod h1:k9KuWN2LBtLbKHgcyh/0lrwk3Kr0cOAhiR3hi/mrwOQ=
 github.com/openstack-k8s-operators/lib-common/modules/openstack v0.3.1-0.20240615134235-24529fcff658 h1:Vb2WhryohIhyeG55z3HDG3R5hk4ipvAYRxAOUgYrOlI=
 github.com/openstack-k8s-operators/lib-common/modules/openstack v0.3.1-0.20240615134235-24529fcff658/go.mod h1:zuPcZ5Kopr15AdfxvA0xqKIIGCZ0XbSe/0VHNKuvbEE=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
@@ -105,6 +103,8 @@ github.com/spf13/pflag v1.0.5/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
+github.com/stuggi/lib-common/modules/common v0.0.0-20240618070955-1d6e4fd1b656 h1:0H6V4Yoh2tM/YfRJPMOKd2W2zlDZYs8UOHhoSrjTyAk=
+github.com/stuggi/lib-common/modules/common v0.0.0-20240618070955-1d6e4fd1b656/go.mod h1:k9KuWN2LBtLbKHgcyh/0lrwk3Kr0cOAhiR3hi/mrwOQ=
 github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
