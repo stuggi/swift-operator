@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"maps"
 	"slices"
+	"strings"
 	"time"
 
 	"github.com/go-logr/logr"
@@ -329,6 +330,11 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 		if svcOverride.EmbeddedLabelsAnnotations == nil {
 			svcOverride.EmbeddedLabelsAnnotations = &service.EmbeddedLabelsAnnotations{}
 		}
+		defaultName := fmt.Sprintf("%s.%s.svc", endpointName, instance.Namespace)
+		serverName, serverAliases, err := service.GetVHostServerName(svcOverride, defaultName)
+		if err != nil {
+			return ctrl.Result{}, fmt.Errorf("get %s vhost server name: %w", endpointType, err)
+		}
 
 		exportLabels := util.MergeStringMaps(
 			serviceLabels,
@@ -345,7 +351,7 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 				Labels:    exportLabels,
 				Selector:  serviceLabels,
 				Port: service.GenericServicePort{
-					Name:     endpointName,
+					Name:     endpointTypeStr,
 					Port:     data.Port,
 					Protocol: corev1.ProtocolTCP,
 				},
@@ -377,11 +383,17 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 			svc.AddAnnotation(map[string]string{
 				service.AnnotationIngressCreateKey: "false",
 			})
-			if svc.GetServiceType() == corev1.ServiceTypeLoadBalancer {
-				svc.AddAnnotation(map[string]string{
-					service.AnnotationHostnameKey: svc.GetServiceHostname(), // add annotation to register service name in dnsmasq
-				})
+		}
+		svc.RemoveAnnotation(service.AnnotationHostnameKey)
+		svc.RemoveAnnotation(service.AnnotationCNAMEsKey)
+		if svc.GetServiceType() == corev1.ServiceTypeLoadBalancer {
+			annotations := map[string]string{
+				service.AnnotationHostnameKey: serverName,
 			}
+			if len(serverAliases) > 0 {
+				annotations[service.AnnotationCNAMEsKey] = strings.Join(serverAliases, ",")
+			}
+			svc.AddAnnotation(annotations)
 		}
 
 		ctrlResult, err := svc.CreateOrPatch(ctx, helper)
@@ -628,7 +640,7 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 	}
 
 	// Create a Secret populated with content from templates/
-	tpl := swiftproxy.SecretTemplates(
+	tpl, err := swiftproxy.SecretTemplates(
 		instance,
 		serviceLabels,
 		keystonePublicURL,
@@ -644,6 +656,15 @@ func (r *SwiftProxyReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 		acID,
 		acSecret,
 	)
+	if err != nil {
+		instance.Status.Conditions.Set(condition.FalseCondition(
+			condition.ServiceConfigReadyCondition,
+			condition.ErrorReason,
+			condition.SeverityWarning,
+			condition.ServiceConfigReadyErrorMessage,
+			err.Error()))
+		return ctrl.Result{}, err
+	}
 	err = secret.EnsureSecrets(ctx, helper, instance, tpl, &envVars)
 	if err != nil {
 		instance.Status.Conditions.Set(condition.FalseCondition(
